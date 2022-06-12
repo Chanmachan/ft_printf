@@ -65,14 +65,22 @@ int 	check_conv(char *str, va_list args)
 {
 	int 	rtn;
 	int 	d;
+	char	*s;
+	size_t 	i;
 
 	rtn = 0;
-	d = va_arg(args, int);
-	if (++*str == 'd')
+	i = 1;
+	if (str[i] == 'd')
 	{
+		d = va_arg(args, int);
 		ft_putnbr(d);
 		rtn = get_digit(d);
-		printf("digit = %d\n", rtn);
+		return (rtn);
+	}
+	else if (str[i] == 's')
+	{
+		s = va_arg(args, char *);
+		rtn += ft_putstr_fd(s, 1);
 		return (rtn);
 	}
 	else
@@ -94,10 +102,8 @@ int		ft_printf(const char *format, ...)
 	{
 		if (*str == '%')
 		{
-			printf("test00\n");
 			rtn += check_conv(str, args);
-			str++;
-			continue ;
+			str = str + 2; //address move -> *%d*
 		}
 		rtn += ft_putchar_fd(*str, 1);
 		str++;
@@ -129,7 +135,7 @@ int main(void)
 
 int main(void)
 {
-	ft_printf("%d\n", 123);
-	printf("%d\n", 123);
+	ft_printf("%s\n", "abc");
+	printf("%s\n", "abc");
 	return (0);
 }
