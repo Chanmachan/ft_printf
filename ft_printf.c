@@ -53,11 +53,12 @@ int 	get_digit(int args)
 	int 	digit;
 
 	digit = 0;
-	while (args > 0)
+	while (args / 10 > 0)
 	{
 		args = args / 10;
 		digit++;
 	}
+	digit++;
 	return (digit);
 }
 
@@ -66,6 +67,8 @@ int 	check_conv(char *str, va_list args)
 	int 	rtn;
 	int 	d;
 	char	*s;
+	int 	c;
+	void 	*p;
 	size_t 	i;
 
 	rtn = 0;
@@ -81,8 +84,21 @@ int 	check_conv(char *str, va_list args)
 	{
 		s = va_arg(args, char *);
 		rtn += ft_putstr_fd(s, 1);
+//		printf("\ns_rtn = %d\n", rtn);
 		return (rtn);
 	}
+	else if (str[i] == 'c')
+	{
+		c = va_arg(args, int);
+		rtn += ft_putchar_fd((char)c, 1);
+//		printf("\nc_rtn = %d\n", rtn);
+		return (rtn);
+	}
+	/*else if (str[i] == 'p')
+	{
+		p = va_arg(args, void *);
+		return (rtn);
+	}*/
 	else
 		return (0);
 }
@@ -104,15 +120,18 @@ int		ft_printf(const char *format, ...)
 		{
 			rtn += check_conv(str, args);
 			str = str + 2; //address move -> *%d*
+			continue;
 		}
 		rtn += ft_putchar_fd(*str, 1);
+//		printf("\nlast_rtn = %d\n", rtn);
 		str++;
 	}
 	va_end(args);
+//	printf("last_rtn = %d\n", rtn);
 	return (rtn);
 }
 
-/*#ifdef TEST
+#ifdef TEST
 
 #include <stdio.h>
 
@@ -126,16 +145,19 @@ int		ft_printf(const char *format, ...)
 int main(void)
 {
 	int	res;
-	F("%d\n", 123);
+	F("[%c]\n", 'c');
+	F("res = [%d]\n", res);
 	return (0);
 }
-#endif*/
+#endif
 
 #include <stdio.h>
 
-int main(void)
+/*int main(void)
 {
+	ft_printf("%c\n", 'c');
 	ft_printf("%s\n", "abc");
+	printf("%c\n", 'c');
 	printf("%s\n", "abc");
 	return (0);
-}
+}*/
