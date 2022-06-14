@@ -145,60 +145,47 @@ int 	get_digit_onesix(unsigned long args)
 	return (digit);
 }
 
-int 	ft_put_conv_base(unsigned long args)
+int 	ft_put_conv_base(unsigned long long args)
 {
 	unsigned long 	rtn;
 	char 			*str;
 	int 			digit;
-	size_t 			i;
 
 	rtn = get_digit_onesix(args);
-	digit = rtn + 1;
+	digit = rtn;
 	if (!(str = (char *) malloc (sizeof(char) * (digit + 1))))
 		return (0);
-	i = 0;
+	str[digit--] = '\0';
+
 	while (args > 0)
 	{
-		printf("test00\n");
 		if (args % 16 < 10)
 		{
-			printf("**[%lu]\n", args % 16 + 48);
-			str[i] = (args % 16) + 48;
-			printf("str[%zu] = %c\n", i, str[i]);
+			str[digit] = (args % 16) + 48;
+			printf("str[%d] = %c\n", digit, str[digit]);
 		}
 		else
 		{
-			printf("##[%lu]\n", args % 16 + 87);
-			str[i] = (args % 16) + 87;
-			printf("str[%zu] = %c\n", i, str[i]);
+			str[digit] = (args % 16) + 87;
+			printf("str[%d] = %c\n", digit, str[digit]);
 		}
-		i++;
 		args = args / 16;
 		digit--;
 	}
-	str[digit] = '\0';
-	printf("\nstr[0] = ");
-	ft_putchar_fd(str[0], 1);
-	printf("\nstr[1] = ");
-	ft_putchar_fd(str[1], 1);
-	printf("\nstr[2] = ");
-	ft_putchar_fd(str[2], 1);
-	printf("\nstr[3] = ");
-	ft_putchar_fd(str[3], 1);
-//	printf("\nstr = ");
-//	ft_putstr_fd(str, 1);
-	printf("\n%s\n", str);
+	ft_putstr_fd(str, 1);
+	printf("\n%lu\n", rtn);
 	return (rtn);
 }
 
+/*
 int main(int argc, char **argv)
 {
 	if (argc == 2)
 	{
-		unsigned long a = atoi(argv[1]);
+		unsigned long long a = atoi(argv[1]);
 		ft_put_conv_base(a);
 //		printf("[%d]\n", );
 	}
 	else
 		return (0);
-}
+}*/
