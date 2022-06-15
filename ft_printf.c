@@ -62,13 +62,57 @@ int 	get_digit(int args)
 	return (digit);
 }
 
+int 	get_digit_onesix(unsigned long args)
+{
+	int  	digit;
+
+	digit = 0;
+	while (args / 16)
+	{
+		args = args / 16;
+		digit++;
+	}
+	digit++;
+	return (digit);
+}
+
+int 	ft_put_conv_base(int args)
+{
+	int 	rtn;
+	char 	*str;
+	int 	digit;
+
+	if (args == -2147483648)
+	{
+		ft_putstr_fd("80000000", 1);
+		return (8);
+	}
+	rtn = get_digit_onesix(args);
+	digit = rtn;
+	if (!(str = (char *) malloc (sizeof(char) * (digit + 1))))
+		return (0);
+	str[digit--] = '\0';
+	if (args == 0)
+		str[digit] = 48;
+	while (args > 0)
+	{
+		if (args % 16 < 10)
+			str[digit--] = (args % 16) + 48;
+		else
+			str[digit--] = (args % 16) + 87;
+		args = args / 16;
+	}
+	ft_putstr_fd(str, 1);
+	return (rtn);
+}
+
 int 	check_conv(char *str, va_list args)
 {
 	int 	rtn;
 	int 	d;
 	char	*s;
 	int 	c;
-	void 	*p;
+	int 	x;
 	size_t 	i;
 
 	rtn = 0;
@@ -94,11 +138,12 @@ int 	check_conv(char *str, va_list args)
 //		printf("\nc_rtn = %d\n", rtn);
 		return (rtn);
 	}
-	/*else if (str[i] == 'p')
+	else if (str[i] == 'x')
 	{
-		p = va_arg(args, void *);
+		x = va_arg(args, int);
+		rtn += ft_put_conv_base(x);
 		return (rtn);
-	}*/
+	}
 	else
 		return (0);
 }
@@ -145,7 +190,7 @@ int		ft_printf(const char *format, ...)
 int main(void)
 {
 	int	res;
-	F("[%c]\n", 'c');
+	F("[%x]\n", 123);
 	F("res = [%d]\n", res);
 	return (0);
 }
