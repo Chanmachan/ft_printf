@@ -53,6 +53,13 @@ int 	get_digit(int args)
 	int 	digit;
 
 	digit = 0;
+	if (args == -2147483648)
+		return (11);
+	if (args < 0)
+	{
+		args *= -1;
+		digit++;
+	}
 	while (args / 10 > 0)
 	{
 		args = args / 10;
@@ -62,11 +69,13 @@ int 	get_digit(int args)
 	return (digit);
 }
 
-int 	get_digit_onesix(unsigned long args)
+int 	get_digit_onesix(int args)
 {
 	int  	digit;
 
 	digit = 0;
+	if (args < 0)
+		args *= -1;
 	while (args / 16)
 	{
 		args = args / 16;
@@ -76,7 +85,7 @@ int 	get_digit_onesix(unsigned long args)
 	return (digit);
 }
 
-int 	ft_put_conv_base(int args)
+int 	ft_put_conv_base_lower(int args)
 {
 	int 	rtn;
 	char 	*str;
@@ -106,6 +115,36 @@ int 	ft_put_conv_base(int args)
 	return (rtn);
 }
 
+int 	ft_put_conv_base_upper(int args)
+{
+	int 	rtn;
+	char 	*str;
+	int 	digit;
+
+	if (args == -2147483648)
+	{
+		ft_putstr_fd("80000000", 1);
+		return (8);
+	}
+	rtn = get_digit_onesix(args);
+	digit = rtn;
+	if (!(str = (char *) malloc (sizeof(char) * (digit + 1))))
+		return (0);
+	str[digit--] = '\0';
+	if (args == 0)
+		str[digit] = 48;
+	while (args > 0)
+	{
+		if (args % 16 < 10)
+			str[digit--] = (args % 16) + 48;
+		else
+			str[digit--] = (args % 16) + 55;
+		args = args / 16;
+	}
+	ft_putstr_fd(str, 1);
+	return (rtn);
+}
+
 int 	check_conv(char *str, va_list args)
 {
 	int 	rtn;
@@ -113,11 +152,12 @@ int 	check_conv(char *str, va_list args)
 	char	*s;
 	int 	c;
 	int 	x;
+	int 	X;
 	size_t 	i;
 
 	rtn = 0;
 	i = 1;
-	if (str[i] == 'd')
+	if (str[i] == 'd' || str[i] == 'i')
 	{
 		d = va_arg(args, int);
 		ft_putnbr(d);
@@ -138,10 +178,21 @@ int 	check_conv(char *str, va_list args)
 //		printf("\nc_rtn = %d\n", rtn);
 		return (rtn);
 	}
-	else if (str[i] == 'x')
+	else if (str[i] == 'x') //have to fix when args is negative
 	{
 		x = va_arg(args, int);
-		rtn += ft_put_conv_base(x);
+		rtn += ft_put_conv_base_lower(x);
+		return (rtn);
+	}
+	else if (str[i] == 'X') //have to fix when args is negative
+	{
+		X = va_arg(args, int);
+		rtn += ft_put_conv_base_upper(X);
+		return (rtn);
+	}
+	else if (str[i] == '%')
+	{
+		rtn += ft_putchar_fd('%', 1);
 		return (rtn);
 	}
 	else
@@ -172,7 +223,6 @@ int		ft_printf(const char *format, ...)
 		str++;
 	}
 	va_end(args);
-//	printf("last_rtn = %d\n", rtn);
 	return (rtn);
 }
 
@@ -190,8 +240,20 @@ int		ft_printf(const char *format, ...)
 int main(void)
 {
 	int	res;
-	F("[%x]\n", 123);
-	F("res = [%d]\n", res);
+	F("  d = [%d]\n", -123);
+	F("res = %d\n", res);
+	F("  i = [%i]\n", -2147483648);
+	F("res = %d\n", res);
+	F("  s = [%s]\n", "abc");
+	F("res = %d\n", res);
+	F("  c = [%c]\n", 'c');
+	F("res = %d\n", res);
+	F("  x = [%x]\n", 123);
+	F("res = %d\n", res);
+	F("  X = [%X]\n", 123);
+	F("res = %d\n", res);
+	F("percent = [%%]\n");
+	F("res = %d\n", res);
 	return (0);
 }
 #endif
