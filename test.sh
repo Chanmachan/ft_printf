@@ -2,9 +2,9 @@ make ft_printf
 make printf
 ./ft_printf > ft_printf.txt
 ./printf > printf.txt
-echo ft_printf -\> | tr '\n' ' '
+echo ---------- ft_printf ----------
 cat ft_printf.txt
-echo printf -\> | tr '\n' ' '
+echo ---------- printf ----------
 cat printf.txt
 echo -----------------
 diff -a --suppress-common-lines ft_printf.txt printf.txt
