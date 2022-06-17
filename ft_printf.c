@@ -153,6 +153,7 @@ int 	check_conv(char *str, va_list args)
 	int 			X;
 	unsigned int	u;
 	size_t 			i;
+	void 			*p;
 
 	rtn = 0;
 	i = 1;
@@ -203,6 +204,12 @@ int 	check_conv(char *str, va_list args)
 		rtn += get_digit(u);
 		return (rtn);
 	}
+	else if (str[i] == 'p')
+	{
+		p = va_arg(args, void *);
+		rtn += ft_putchar_fd(&(char *)p, 1);
+		return (rtn);
+	}
 	else
 		return (0);
 }
@@ -234,7 +241,7 @@ int		ft_printf(const char *format, ...)
 	return (rtn);
 }
 
-#ifdef TEST
+/*#ifdef TEST
 
 #include <stdio.h>
 
@@ -264,19 +271,23 @@ int main(void)
 	F("res = %d\n", res);
 	F("  u = [%u]\n", 4294967295);
 	F("res = %d\n", res);
-	F("  p = [%p]\n", 1);
-	F("res = %d\n", res);
+	*//*F("  p = [%p]\n", );
+	F("res = %d\n", res);*//*
 	return (0);
 }
 #endif
 
-#include <stdio.h>
+#include <stdio.h>*/
 
-/*int main(void)
+int main(void)
 {
+	unsigned int i = 0;
+
 	ft_printf("%c\n", 'c');
 	ft_printf("%s\n", "abc");
+	ft_printf("%p\n", &i);
 	printf("%c\n", 'c');
 	printf("%s\n", "abc");
+
 	return (0);
-}*/
+}
