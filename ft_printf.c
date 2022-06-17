@@ -1,5 +1,7 @@
 #include "ft_printf.h"
 #include <stdio.h>
+#include "fukuma"
+define fukuma
 
 int 	ft_putchar_fd(char c, int fd)
 {
