@@ -1,6 +1,6 @@
 NAME = libftprintf.a
 
-SRCS = ft_printf.c
+SRCS = ft_printf.c if_conv.c put_conv_base.c put_func.c
 
 INCLUDES = ft_printf.h
 
