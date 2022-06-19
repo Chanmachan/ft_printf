@@ -22,28 +22,30 @@ int 	ft_putstr_fd(char *s, int fd)
 	return (i);
 }
 
-void 	ft_putnbr(long args)
+int 	ft_putnbr(long args)
 {
+	int 	rtn;
+
+	rtn = 0;
 	if (args == -2147483648)
 	{
-		ft_putchar_fd('-', 1);
-		ft_putchar_fd('2', 1);
+		rtn += ft_putchar_fd('-', 1);
+		rtn += ft_putchar_fd('2', 1);
 		args = 147483648;
 	}
 	if (args < 0)
 	{
-		ft_putchar_fd('-', 1);
+		rtn += ft_putchar_fd('-', 1);
 		args *= -1;
 	}
 	if (args >= 10)
 	{
-		ft_putnbr(args / 10);
-		ft_putnbr(args % 10);
+		rtn += ft_putnbr(args / 10);
+		rtn += ft_putnbr(args % 10);
 	}
 	else
-	{
-		ft_putchar_fd(args + 48, 1);
-	}
+		rtn += ft_putchar_fd(args + 48, 1);
+	return (rtn);
 }
 
 int 	get_digit(long args)
@@ -90,9 +92,7 @@ int 	ft_put_conv_base_lower(long args)
 	int 	digit;
 
 	if (args < 0)
-	{
-		args = args + 4294967295 + 1;
-	}
+		args = args + 4294967295 + 1; //unsigned int max + 1
 	rtn = get_digit_hexa(args);
 	digit = rtn;
 	str = (char *) malloc (sizeof(char) * (digit + 1));
@@ -113,14 +113,14 @@ int 	ft_put_conv_base_lower(long args)
 	return (rtn);
 }
 
-int 	ft_put_conv_base_upper(unsigned int args)
+int 	ft_put_conv_base_upper(long args)
 {
 	int 	rtn;
 	char 	*str;
 	int 	digit;
 
 	if (args < 0)
-		args = args + 4294967295 + 1;
+		args = args + 4294967295 + 1;//unsigned int max + 1
 	rtn = get_digit_hexa(args);
 	digit = rtn;
 	str = (char *) malloc (sizeof(char) * (digit + 1));
@@ -141,76 +141,108 @@ int 	ft_put_conv_base_upper(unsigned int args)
 	return (rtn);
 }
 
+int 	if_d_or_i(va_list args)
+{
+	int		rtn;
+	int 	conv;
+
+	rtn = 0;
+	conv = va_arg(args, int);
+	rtn += ft_putnbr(conv);
+	return (rtn);
+}
+
+int 	if_s(va_list args)
+{
+	int 	rtn;
+	char	*s;
+
+	rtn = 0;
+	s = va_arg(args, char *);
+	rtn += ft_putstr_fd(s, 1);
+	return (rtn);
+}
+
+int 	if_c(va_list args)
+{
+	int		rtn;
+	int 	conv;
+
+	rtn = 0;
+	conv = va_arg(args, int);
+	rtn += ft_putchar_fd((char)conv, 1);
+	return (rtn);
+}
+
+int 	if_x(va_list args)
+{
+	int 	rtn;
+	unsigned int conv;
+
+	rtn = 0;
+	conv = va_arg(args, unsigned int);
+	rtn += ft_put_conv_base_lower(conv);
+	return (rtn);
+}
+
+int 	if_X(va_list args)
+{
+	int 	rtn;
+
+	unsigned int conv;
+	rtn = 0;
+	conv = va_arg(args, unsigned int);
+	rtn += ft_put_conv_base_upper(conv);
+	return (rtn);
+}
+
+int 	if_u(va_list args)
+{
+	int 	rtn;
+
+	unsigned int u;
+	rtn = 0;
+	u = va_arg(args, unsigned int);
+	rtn += ft_putnbr(u);
+	return (rtn);
+}
+
+int 	if_p(va_list args)
+{
+	int 	rtn;
+	void	*p;
+
+	rtn = 0;
+	p = va_arg(args, void *);
+	rtn += ft_putstr_fd("0x", 1);
+	rtn += ft_put_conv_base_lower((long)p);
+	return (rtn);
+}
+
 int 	check_conv(char *str, va_list args)
 {
 	int 			rtn;
-	int 			d;
-	char			*s;
-	int 			c;
-	int 			x;
-	int 			X;
-	unsigned int	u;
 	size_t 			i;
-	void 			*p;
 
 	rtn = 0;
 	i = 1;
 	if (str[i] == 'd' || str[i] == 'i')
-	{
-		d = va_arg(args, int);
-		ft_putnbr(d);
-		rtn = get_digit(d);
-		return (rtn);
-	}
+		rtn += if_d_or_i(args);
 	else if (str[i] == 's')
-	{
-		s = va_arg(args, char *);
-		rtn += ft_putstr_fd(s, 1);
-//		printf("\ns_rtn = %d\n", rtn);
-		return (rtn);
-	}
+		rtn += if_s(args);
 	else if (str[i] == 'c')
-	{
-		c = va_arg(args, int);
-		rtn += ft_putchar_fd((char)c, 1);
-//		printf("\nc_rtn = %d\n", rtn);
-		return (rtn);
-	}
-	else if (str[i] == 'x') //have to fix when args is negative
-	{
-		x = va_arg(args, unsigned int);
-		rtn += ft_put_conv_base_lower(x);
-		return (rtn);
-	}
-	else if (str[i] == 'X') //have to fix when args is negative
-	{
-		X = va_arg(args, unsigned int);
-		if (X < 0)
-			X = X + 4294967295 + 1;
-		rtn += ft_put_conv_base_upper(X);
-		return (rtn);
-	}
+		rtn += if_c(args);
+	else if (str[i] == 'x')
+		rtn += if_x(args);
+	else if (str[i] == 'X')
+		rtn += if_X(args);
 	else if (str[i] == '%')
-	{
 		rtn += ft_putchar_fd('%', 1);
-		return (rtn);
-	}
 	else if (str[i] == 'u')
-	{
-		u = va_arg(args, unsigned int);
-		ft_putnbr(u);
-		rtn += get_digit(u);
-		return (rtn);
-	}
+		rtn += if_u(args);
 	else if (str[i] == 'p')
-	{
-		p = va_arg(args, void *);
-		rtn += ft_putstr_fd("0x", 1);
-		rtn += ft_put_conv_base_lower((long)p);
-		return (rtn);
-	}
-	else
-		return (0);
+		rtn += if_p(args);
+	return (rtn);
 }
 
 int		ft_printf(const char *format, ...)
@@ -270,9 +302,6 @@ int main(void)
 	F("res = %d\n", res);
 	F("  u = [%u]\n", 4294967295);
 	F("res = %d\n", res);
-	*//*const int i = 0;
-	F("  p = [%p]\n", &i);
-	F("res = %d\n", res);*//*
 	return (0);
 }
 #endif*/
