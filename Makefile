@@ -31,10 +31,10 @@ test:
 	./test.sh
 
 printf:
-	gcc ft_printf.c -D TEST -o printf
+	gcc ft_printf.c if_conv.c put_func.c put_conv_base.c -D TEST -o printf
 
 ft_printf:
-	gcc ft_printf.c -D TEST -D FT_PRINTF -o ft_printf
+	gcc ft_printf.c if_conv.c put_func.c put_conv_base.c -D TEST -D FT_PRINTF -o ft_printf
 
 clean:
 	rm -rf printf ft_printf
