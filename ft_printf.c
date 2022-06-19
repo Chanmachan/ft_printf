@@ -28,7 +28,7 @@ int		ft_printf(const char *format, ...)
 	return (rtn);
 }
 
-#ifdef TEST
+/*#ifdef TEST
 
 #include <stdio.h>
 
@@ -60,7 +60,7 @@ int main(void)
 	F("res = %d\n", res);
 	return (0);
 }
-#endif
+#endif*/
 
 #include <stdio.h>
 
@@ -71,6 +71,7 @@ int main(void)
 	char a[] = "";
 	int res;
 
+	res = 0;
 	ft_printf("%c\n", 'c');
 	ft_printf("%s\n", "abc");
 	res = ft_printf("a = %p\n", a);
