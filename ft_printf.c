@@ -62,9 +62,9 @@ int main(void)
 }
 #endif*/
 
-#include <stdio.h>
+/*#include <stdio.h>
 
-/*int main(void)
+int main(void)
 {
 	unsigned int i = 0;
 //	long addi = (long)&i;
