@@ -41,6 +41,7 @@ int 	ft_put_conv_base_lower(long args)
 		args = args / 16;
 	}
 	ft_putstr_fd(str, 1);
+	free(str);
 	return (rtn);
 }
 
@@ -69,5 +70,6 @@ int 	ft_put_conv_base_upper(long args)
 		args = args / 16;
 	}
 	ft_putstr_fd(str, 1);
+	free(str);
 	return (rtn);
 }
