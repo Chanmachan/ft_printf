@@ -69,7 +69,7 @@ int 	get_digit(long args)
 	return (digit);
 }
 
-int 	get_digit_hexa(int args)
+int 	get_digit_hexa(long args)
 {
 	int  	digit;
 
@@ -85,7 +85,7 @@ int 	get_digit_hexa(int args)
 	return (digit);
 }
 
-int 	ft_put_conv_base_lower(unsigned int args)
+int 	ft_put_conv_base_lower(long args)
 {
 	int 	rtn;
 	char 	*str;
@@ -207,7 +207,8 @@ int 	check_conv(char *str, va_list args)
 	else if (str[i] == 'p')
 	{
 		p = va_arg(args, void *);
-		rtn += ft_putchar_fd(&(char *)p, 1);
+		rtn += ft_putstr_fd("0x", 1);
+		rtn += ft_put_conv_base_lower((long)p);
 		return (rtn);
 	}
 	else
@@ -271,23 +272,34 @@ int main(void)
 	F("res = %d\n", res);
 	F("  u = [%u]\n", 4294967295);
 	F("res = %d\n", res);
-	*//*F("  p = [%p]\n", );
+	*//*const int i = 0;
+	F("  p = [%p]\n", &i);
 	F("res = %d\n", res);*//*
 	return (0);
 }
-#endif
+#endif*/
 
-#include <stdio.h>*/
+#include <stdio.h>
 
 int main(void)
 {
 	unsigned int i = 0;
+//	long addi = (long)&i;
+	char a[] = "";
+	int res;
 
 	ft_printf("%c\n", 'c');
 	ft_printf("%s\n", "abc");
-	ft_printf("%p\n", &i);
+	res = ft_printf("a = %p\n", a);
+	printf("res = %d\n", res);
 	printf("%c\n", 'c');
 	printf("%s\n", "abc");
+	res = printf("a = %p\n", a);
+	printf("res = %d\n", res);
+	printf("&i = %p\n", &i);
+	printf("res = %d\n", res);
+//	printf("&i = %ld\n", addi);
+
 
 	return (0);
 }
