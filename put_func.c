@@ -10,8 +10,6 @@ int 	ft_putstr_fd(char *s, int fd)
 {
 	size_t 	i;
 
-	if (s == NULL)
-		return (0);
 	i = 0;
 	while (s[i] != '\0')
 	{
