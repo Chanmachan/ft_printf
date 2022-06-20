@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int 	get_digit_hexa(long args)
+int 	get_digit_hexa(unsigned long args)
 {
 	int  	digit;
 
@@ -16,9 +16,9 @@ int 	get_digit_hexa(long args)
 	return (digit);
 }
 
-int 	ft_put_conv_base_lower(long args)
+unsigned int 	ft_put_conv_base_lower(unsigned long long args)
 {
-	int 	rtn;
+	unsigned int 	rtn;
 	char 	*str;
 	int 	digit;
 
@@ -45,7 +45,7 @@ int 	ft_put_conv_base_lower(long args)
 	return (rtn);
 }
 
-int 	ft_put_conv_base_upper(long args)
+int 	ft_put_conv_base_upper(unsigned long long args)
 {
 	int 	rtn;
 	char 	*str;
