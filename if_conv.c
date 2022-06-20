@@ -21,6 +21,12 @@ int 	if_s(va_list *args)
 
 	rtn = 0;
 	s = va_arg(*args, char *);
+	if (!s)
+	{
+		rtn += 6;
+		ft_putstr_fd("(null)", 1);
+		return (rtn);
+	}
 	rtn += ft_putstr_fd(s, 1);
 	return (rtn);
 }
@@ -77,7 +83,7 @@ int 	if_p(va_list *args)
 	rtn = 0;
 	p = va_arg(*args, void *);
 	rtn += ft_putstr_fd("0x", 1);
-	rtn += ft_put_conv_base_lower((long)p);
+	rtn += ft_put_conv_base_lower((unsigned long)p);
 	return (rtn);
 }
 

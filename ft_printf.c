@@ -1,5 +1,6 @@
 #include "ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
 
 int		ft_printf(const char *format, ...)
 {
@@ -32,9 +33,9 @@ int		ft_printf(const char *format, ...)
 /*int main(void)
 {
 	printf("ft_printf\n");
-	ft_printf(" %c %c %c ", '1', '2', '3');
-	printf("\nprintf\n");
-	printf(" %c %c %c ", '1', '2', '3');
+	ft_printf(" %p\n %p ", ULONG_MAX, -ULONG_MAX);
+//	printf("\nprintf\n");
+//	printf(" %p %p ", ULONG_MAX, -ULONG_MAX);
 }*/
 
 /*#include <stdio.h>
