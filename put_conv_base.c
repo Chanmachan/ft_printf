@@ -45,11 +45,7 @@ unsigned int 	ft_put_conv_base_lower(unsigned long long args)
 	return (rtn);
 }
 
-<<<<<<< HEAD
 unsigned int 	ft_put_conv_base_upper(unsigned long long args)
-=======
-int 	ft_put_conv_base_upper(unsigned long long args)
->>>>>>> refs/remotes/origin/main
 {
 	int 	rtn;
 	char 	*str;
