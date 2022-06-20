@@ -83,7 +83,7 @@ int 	if_p(va_list *args)
 	rtn = 0;
 	p = va_arg(*args, void *);
 	rtn += ft_putstr_fd("0x", 1);
-	rtn += ft_put_conv_base_lower((unsigned long)p);
+	rtn += ft_put_conv_base_lower((unsigned long long)p);
 	return (rtn);
 }
 
