@@ -28,7 +28,9 @@ int		ft_printf(const char *format, ...)
 	return (rtn);
 }
 
-/*int main(void)
+/*#include <limits.h>
+
+ int main(void)
 {
 	printf("ft_printf\n");
 	ft_printf(" %p\n %p ", ULONG_MAX, -ULONG_MAX);

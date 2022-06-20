@@ -45,7 +45,7 @@ unsigned int 	ft_put_conv_base_lower(unsigned long long args)
 	return (rtn);
 }
 
-int 	ft_put_conv_base_upper(unsigned long long args)
+unsigned int 	ft_put_conv_base_upper(unsigned long long args)
 {
 	int 	rtn;
 	char 	*str;
