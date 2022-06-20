@@ -1,31 +1,67 @@
 #include "ft_printf.h"
+#include <stdio.h>
 
 int		ft_printf(const char *format, ...)
 {
 	char	*str;
 	int 	rtn;
 	va_list args;
+	size_t 	i;
 
+	i = 0;
 	va_start(args, format);
 	str = (char *) format;
-	if (!str)
+	if (str[i] == '\0')
 		return (0);
 	rtn = 0;
-	while (*str)
+	while (str[i] != '\0')
 	{
-		if (*str == '%')
+		if (str[i] == '%')
 		{
-			rtn += check_conv(str, args);
-			str = str + 2; //address move -> *%d*
+			rtn += check_conv(&str[i], &args);
+			i += 2; //address move -> *%d*
 			continue;
 		}
-		rtn += ft_putchar_fd(*str, 1);
-//		printf("\nlast_rtn = %d\n", rtn);
-		str++;
+		rtn += ft_putchar_fd(str[i], 1);
+		i++;
 	}
 	va_end(args);
 	return (rtn);
 }
+
+/*int main(void)
+{
+	printf("ft_printf\n");
+	ft_printf(" %c %c %c ", '1', '2', '3');
+	printf("\nprintf\n");
+	printf(" %c %c %c ", '1', '2', '3');
+}*/
+
+/*#include <stdio.h>
+
+int main(void)
+{
+	unsigned int i = 0;
+//	long addi = (long)&i;
+	char a[] = "";
+	int res;
+
+	res = 0;
+	ft_printf("%c\n", 'c');
+	ft_printf("%s\n", "abc");
+	res = ft_printf("a = %p\n", a);
+	printf("res = %d\n", res);
+	printf("%c\n", 'c');
+	printf("%s\n", "abc");
+	res = printf("a = %p\n", a);
+	printf("res = %d\n", res);
+	printf("&i = %p\n", &i);
+	printf("res = %d\n", res);
+//	printf("&i = %ld\n", addi);
+
+
+	return (0);
+}*/
 
 /*#ifdef TEST
 
@@ -60,29 +96,3 @@ int main(void)
 	return (0);
 }
 #endif*/
-
-/*#include <stdio.h>
-
-int main(void)
-{
-	unsigned int i = 0;
-//	long addi = (long)&i;
-	char a[] = "";
-	int res;
-
-	res = 0;
-	ft_printf("%c\n", 'c');
-	ft_printf("%s\n", "abc");
-	res = ft_printf("a = %p\n", a);
-	printf("res = %d\n", res);
-	printf("%c\n", 'c');
-	printf("%s\n", "abc");
-	res = printf("a = %p\n", a);
-	printf("res = %d\n", res);
-	printf("&i = %p\n", &i);
-	printf("res = %d\n", res);
-//	printf("&i = %ld\n", addi);
-
-
-	return (0);
-}*/
