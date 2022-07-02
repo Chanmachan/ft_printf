@@ -28,6 +28,13 @@ int		ft_printf(const char *format, ...)
 	return (rtn);
 }
 
+/*#include <stdio.h>
+
+int main(void)
+{
+	printf("%nbbv\n");
+}*/
+
 /*#include <limits.h>
 
  int main(void)
