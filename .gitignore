@@ -1,0 +1,7 @@
+libft/*.out
+
+printfTester
+
+*.idea
+
+.DS_store
