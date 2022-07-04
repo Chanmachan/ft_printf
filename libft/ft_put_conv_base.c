@@ -130,7 +130,7 @@ char	*ft_itoa(int n)
 	return (chr_n);
 }
 
-int 	get_digit_onesix(unsigned long args)
+int 	get_digit_hexa(unsigned long args)
 {
 	int  	digit;
 
@@ -141,51 +141,54 @@ int 	get_digit_onesix(unsigned long args)
 		digit++;
 	}
 	digit++;
-	printf("digit = %d\n", digit);
 	return (digit);
 }
 
-int 	ft_put_conv_base(unsigned long long args)
+int 	ft_put_conv_base(int args)
 {
-	unsigned long 	rtn;
-	char 			*str;
-	int 			digit;
+	int 	rtn;
+	char 	*str;
+	int 	digit;
 
-	rtn = get_digit_onesix(args);
+	if (args == -2147483648)
+	{
+		ft_putstr_fd("80000000", 1);
+		return (8);
+	}
+	rtn = get_digit_hexa(args);
 	digit = rtn;
 	if (!(str = (char *) malloc (sizeof(char) * (digit + 1))))
 		return (0);
 	str[digit--] = '\0';
-
+	if (args == 0)
+		str[digit] = 48;
 	while (args > 0)
 	{
 		if (args % 16 < 10)
-		{
-			str[digit] = (args % 16) + 48;
-			printf("str[%d] = %c\n", digit, str[digit]);
-		}
+			str[digit--] = (args % 16) + 48;
 		else
-		{
-			str[digit] = (args % 16) + 87;
-			printf("str[%d] = %c\n", digit, str[digit]);
-		}
+			str[digit--] = (args % 16) + 87;// if lower -> 87, if upper -> 55
 		args = args / 16;
-		digit--;
 	}
 	ft_putstr_fd(str, 1);
-	printf("\n%lu\n", rtn);
 	return (rtn);
 }
 
-/*
-int main(int argc, char **argv)
+/*int main(int argc, char **argv)
 {
 	if (argc == 2)
 	{
-		unsigned long long a = atoi(argv[1]);
-		ft_put_conv_base(a);
-//		printf("[%d]\n", );
+		int a = atoi(argv[1]);
+		printf("\n%d\n", ft_put_conv_base(a));
+		printf("%x\n", a);
 	}
 	else
 		return (0);
 }*/
+/*
+int main(void)
+{
+	printf("%x\n", 47);
+	printf("%x\n", -1);
+}
+*/

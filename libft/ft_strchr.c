@@ -10,15 +10,11 @@ char	*ft_strchr(const char *s, int c)
 	while (new_s[i] != '\0')
 	{
 		if (new_s[i] == (char) c)
-		{
 			return (new_s + i);
-		}
 		i++;
 	}
 	if ((char) c == '\0')
-	{
 		return (new_s + i);
-	}
 	return (0);
 }
 
