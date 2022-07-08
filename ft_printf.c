@@ -10,7 +10,7 @@ int		ft_printf(const char *format, ...)
 	i = 0;
 	va_start(args, format);
 	str = (char *) format;
-	if (str[i] == '\0' || str == NULL)
+	if (str == NULL)
 		return (-1);
 	rtn = 0;
 	while (str[i] != '\0')

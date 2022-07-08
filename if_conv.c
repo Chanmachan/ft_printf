@@ -1,6 +1,3 @@
-//
-// Created by 本間優之介 on 2022/06/19.
-//
 #include "ft_printf.h"
 
 int 	if_d_or_i(va_list *args)
