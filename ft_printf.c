@@ -10,7 +10,7 @@ int		ft_printf(const char *format, ...)
 	i = 0;
 	va_start(args, format);
 	str = (char *) format;
-	if (str == NULL)
+	if (format == NULL || format[0] == '\0')
 		return (-1);
 	rtn = 0;
 	while (str[i] != '\0')
@@ -18,35 +18,39 @@ int		ft_printf(const char *format, ...)
 		if (str[i] == '%')
 		{
 			rtn += check_conv(&str[i], &args);
-			i += 2; //address move -> *%d*
-			continue;
+			i++;
 		}
-		rtn += ft_putchar_fd(str[i], 1);
+		else
+			rtn += ft_putchar_fd(str[i], 1);
 		i++;
 	}
 	va_end(args);
 	return (rtn);
 }
 
-#include <stdio.h>
+/*#include <stdio.h>
 #include <libc.h>
 
 int main()
 {
 	int i = 0;
-	char *s = (char *)calloc(1, (size_t)INT_MAX + 10);
-	memset(s, 'a', (size_t)INT_MAX + 5);
+	char *s = (char *)calloc(1, (size_t)INT_MAX);
+	memset(s, 'a', (size_t)INT_MAX);
 	i = ft_printf("%s\n", s);
 	printf("%d\n", i);
 	return (0);
-}
+}*/
 
-/*#include <stdio.h>
+#include <stdio.h>
 
 int main(void)
 {
-	printf("%nbbv\n");
-}*/
+	int	res;
+	char str[] = "1234";
+
+	res = ft_printf("%p\n", str);
+	printf("res = [%d]\n", res);
+}
 
 /*#include <limits.h>
 
