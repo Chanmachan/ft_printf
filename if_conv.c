@@ -1,9 +1,9 @@
 #include "ft_printf.h"
 
-int 	if_d_or_i(va_list *args)
+int	if_d_or_i(va_list *args)
 {
-	int		rtn;
-	int 	conv;
+	int	rtn;
+	int	conv;
 
 	rtn = 0;
 	conv = va_arg(*args, int);
@@ -11,9 +11,9 @@ int 	if_d_or_i(va_list *args)
 	return (rtn);
 }
 
-int 	if_s(va_list *args)
+int	if_s(va_list *args)
 {
-	int 	rtn;
+	int		rtn;
 	char	*s;
 
 	rtn = 0;
@@ -28,10 +28,10 @@ int 	if_s(va_list *args)
 	return (rtn);
 }
 
-int 	if_c(va_list *args)
+int	if_c(va_list *args)
 {
-	int		rtn;
-	int 	conv;
+	int	rtn;
+	int	conv;
 
 	rtn = 0;
 	conv = va_arg(*args, int);
@@ -39,10 +39,10 @@ int 	if_c(va_list *args)
 	return (rtn);
 }
 
-int 	if_x(va_list *args)
+int	if_x(va_list *args)
 {
-	int 	rtn;
-	unsigned int conv;
+	int				rtn;
+	unsigned int	conv;
 
 	rtn = 0;
 	conv = va_arg(*args, unsigned int);
@@ -50,31 +50,31 @@ int 	if_x(va_list *args)
 	return (rtn);
 }
 
-int 	if_X(va_list *args)
+int	if_X(va_list *args)
 {
-	int 	rtn;
+	int				rtn;
+	unsigned int	conv;
 
-	unsigned int conv;
 	rtn = 0;
 	conv = va_arg(*args, unsigned int);
 	rtn += ft_put_conv_base_upper(conv);
 	return (rtn);
 }
 
-int 	if_u(va_list *args)
+int	if_u(va_list *args)
 {
-	int 	rtn;
+	int				rtn;
+	unsigned int	u;
 
-	unsigned int u;
 	rtn = 0;
 	u = va_arg(*args, unsigned int);
 	rtn += ft_putnbr(u);
 	return (rtn);
 }
 
-int 	if_p(va_list *args)
+int	if_p(va_list *args)
 {
-	int 	rtn;
+	int		rtn;
 	void	*p;
 
 	rtn = 0;
@@ -84,10 +84,10 @@ int 	if_p(va_list *args)
 	return (rtn);
 }
 
-int 	check_conv(char *str, va_list *args)
+int	check_conv(char *str, va_list *args)
 {
-	int 			rtn;
-	size_t 			i;
+	int		rtn;
+	size_t	i;
 
 	rtn = 0;
 	i = 1;

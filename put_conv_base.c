@@ -1,8 +1,8 @@
 #include "ft_printf.h"
 
-int 	get_digit_hexa(unsigned long args)
+int	get_digit_hexa(unsigned long args)
 {
-	int  	digit;
+	int	digit;
 
 	digit = 0;
 	if (args < 0)
