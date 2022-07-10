@@ -1,14 +1,14 @@
 #include "ft_printf.h"
 
-int 	ft_putchar_fd(char c, int fd)
+int	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 	return (1);
 }
 
-int 	ft_putstr_fd(char *s, int fd)
+int	ft_putstr_fd(char *s, int fd)
 {
-	size_t 	i;
+	size_t	i;
 
 	i = 0;
 	while (s[i] != '\0')
@@ -19,9 +19,9 @@ int 	ft_putstr_fd(char *s, int fd)
 	return (i);
 }
 
-int 	ft_putnbr(long args)
+int	ft_putnbr(long args)
 {
-	int 	rtn;
+	int	rtn;
 
 	rtn = 0;
 	if (args == -2147483648)
