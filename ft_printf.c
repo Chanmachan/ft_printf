@@ -1,5 +1,7 @@
 #include "ft_printf.h"
 
+#include <stdio.h>
+
 int		ft_printf(const char *format, ...)
 {
 	char	*str;
@@ -8,10 +10,11 @@ int		ft_printf(const char *format, ...)
 	size_t 	i;
 
 	i = 0;
+	printf("aaa\n");
 	va_start(args, format);
 	str = (char *) format;
 	if (format == NULL || format[0] == '\0')
-		return (-1);
+		return (0);
 	rtn = 0;
 	while (str[i] != '\0')
 	{
@@ -41,23 +44,31 @@ int main()
 	return (0);
 }*/
 
-/*#include <stdio.h>
+#include <stdio.h>
+#include <limits.h>
+#include <string.h>
 
 int main(void)
 {
 	int	res;
-	char str[] = "1234";
-	unsigned int xX= 1234;
+//	char str[] = "1234";
+//	unsigned int xX= 1234;
+	char *a = malloc(sizeof(int) * (INT_MAX));
+	memset(a, 'a', INT_MAX);
 
-	res = ft_printf("%X\n", xX);
+//	res = ft_printf("%s\n", a);
+//	printf("res = [%d]\n", res);
+	res = printf("%s\n", a);
 	printf("res = [%d]\n", res);
-	res = printf("%X\n", xX);
+	/*res = ft_printf("ft_printf :\t%X\n", xX);
 	printf("res = [%d]\n", res);
-	res = ft_printf("%p\n", str);
+	res = printf("printf :\t%X\n", xX);
 	printf("res = [%d]\n", res);
-	res = printf("%p\n", str);
+	res = ft_printf("ft_printf :\t%p\n", str);
 	printf("res = [%d]\n", res);
-}*/
+	res = printf("printf :\t%p\n", str);
+	printf("res = [%d]\n", res);*/
+}
 
 /*#include <limits.h>
 

@@ -34,15 +34,6 @@ static char	*put_conv(char *str, unsigned long long args, size_t digit)
 	return (str);
 }
 
-static int	ft_toupper(int	c)
-{
-	if (c >= 97 && c <= 122)
-	{
-		c -= 32;
-	}
-	return (c);
-}
-
 unsigned int	ft_put_conv_base(unsigned long long args, char x_X)
 {
 	unsigned int	rtn;
@@ -63,7 +54,7 @@ unsigned int	ft_put_conv_base(unsigned long long args, char x_X)
 	{
 		while (str[i] != '\0')
 		{
-			str[i] = ft_toupper(str[i]);
+			str[i] = (char)ft_toupper(str[i]);
 			i++;
 		}
 	}

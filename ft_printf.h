@@ -4,6 +4,7 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>
+# include "../libft/libft.h"
 
 int				ft_printf(const char *format, ...);
 int 			ft_putchar_fd(char c, int fd);

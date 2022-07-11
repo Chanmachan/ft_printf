@@ -9,7 +9,9 @@ int	ft_putchar_fd(char c, int fd)
 int	ft_putstr_fd(char *s, int fd)
 {
 	size_t	i;
+	size_t	len;
 
+	len = ft_strlen
 	i = 0;
 	while (s[i] != '\0')
 	{
