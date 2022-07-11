@@ -39,25 +39,14 @@ int	if_c(va_list *args)
 	return (rtn);
 }
 
-int	if_x(va_list *args)
+int	if_x(va_list *args, char x_X)
 {
 	int				rtn;
 	unsigned int	conv;
 
 	rtn = 0;
 	conv = va_arg(*args, unsigned int);
-	rtn += ft_put_conv_base_lower(conv);
-	return (rtn);
-}
-
-int	if_X(va_list *args)
-{
-	int				rtn;
-	unsigned int	conv;
-
-	rtn = 0;
-	conv = va_arg(*args, unsigned int);
-	rtn += ft_put_conv_base_upper(conv);
+	rtn += ft_put_conv_base(conv, x_X);
 	return (rtn);
 }
 
@@ -76,11 +65,13 @@ int	if_p(va_list *args)
 {
 	int		rtn;
 	void	*p;
+	char	c;
 
+	c = 'x';
 	rtn = 0;
 	p = va_arg(*args, void *);
 	rtn += ft_putstr_fd("0x", 1);
-	rtn += ft_put_conv_base_lower((unsigned long long)p);
+	rtn += ft_put_conv_base((unsigned long long)p, c);
 	return (rtn);
 }
 
@@ -97,10 +88,8 @@ int	check_conv(char *str, va_list *args)
 		rtn += if_s(args);
 	else if (str[i] == 'c')
 		rtn += if_c(args);
-	else if (str[i] == 'x')
-		rtn += if_x(args);
-	else if (str[i] == 'X')
-		rtn += if_X(args);
+	else if (str[i] == 'x' || str[i] == 'X')
+		rtn += if_x(args , str[i]);
 	else if (str[i] == '%')
 		rtn += ft_putchar_fd('%', 1);
 	else if (str[i] == 'u')

@@ -41,16 +41,23 @@ int main()
 	return (0);
 }*/
 
-#include <stdio.h>
+/*#include <stdio.h>
 
 int main(void)
 {
 	int	res;
 	char str[] = "1234";
+	unsigned int xX= 1234;
 
+	res = ft_printf("%X\n", xX);
+	printf("res = [%d]\n", res);
+	res = printf("%X\n", xX);
+	printf("res = [%d]\n", res);
 	res = ft_printf("%p\n", str);
 	printf("res = [%d]\n", res);
-}
+	res = printf("%p\n", str);
+	printf("res = [%d]\n", res);
+}*/
 
 /*#include <limits.h>
 
