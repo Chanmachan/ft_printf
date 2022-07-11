@@ -1,10 +1,32 @@
 #include "ft_printf.h"
 
-int		read_args(char *str, va_list *args)
+int	check_conv(char *str, va_list *args, int count)
 {
-	int 	rtn;
-	int 	count;
-	size_t 	i;
+	int		rtn;
+	size_t	i;
+
+	rtn = 0;
+	i = 1;
+	if (str[i] == 'd' || str[i] == 'i')
+		rtn += if_d_or_i(args);
+	else if (str[i] == 's')
+		rtn += if_s(args, count);
+	else if (str[i] == 'c')
+		rtn += if_c(args);
+	else if (str[i] == '%')
+		rtn += ft_putchar('%');
+	else if (str[i] == 'u')
+		rtn += if_u(args);
+	else if (str[i] == 'p' || str[i] == 'x' || str[i] == 'X')
+		rtn += if_p_x(args, count, str[i]);
+	return (rtn);
+}
+
+int	read_args(char *str, va_list *args)
+{
+	int		rtn;
+	int		count;
+	size_t	i;
 
 	i = 0;
 	if (str == NULL || str[0] == '\0')
@@ -27,10 +49,10 @@ int		read_args(char *str, va_list *args)
 	return (rtn);
 }
 
-int		ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
-	int 	rtn;
-	va_list args;
+	int		rtn;
+	va_list	args;
 
 	va_start(args, format);
 	rtn = read_args((char *)format, &args);
@@ -38,20 +60,25 @@ int		ft_printf(const char *format, ...)
 	return (rtn);
 }
 
-/*
+/*#include <string.h>
+
 int main()
 {
 	int res;
-	char a[] = "";
+	char *a = malloc(SIZE_MAX + 1);
+	memset(a, 'n', SIZE_MAX);
+	a[SIZE_MAX + 1] = '\0';
+//	int d = INT_MAX;
 
+	// ft_printf
 	res = ft_printf("ft_printf :\t%s", a);
 	printf("\n");
-	printf("res :\t%d\n", res);
-	res = printf("printf :\t%s", a);
+	printf("res :\t\t%d\n", res);
+	// printf
+	res = printf("printf    :\t%s", a);
 	printf("\n");
-	printf("res :\t%d\n", res);
-}
-*/
+	printf("res + 3 :\t%d\n", res);
+}*/
 
 /*#include <stdio.h>
 #include <libc.h>
