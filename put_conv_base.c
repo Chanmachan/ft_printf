@@ -1,7 +1,5 @@
 #include "ft_printf.h"
 
-#include <stdio.h>
-
 static size_t	get_digit_hexa(unsigned long args)
 {
 	int	digit;
@@ -26,9 +24,9 @@ static char	*put_conv(char *str, unsigned long long args, size_t digit)
 	while (args > 0)
 	{
 		if (args % 16 < 10)
-			str[digit--] = (args % 16) + 48;
+			str[digit--] = (char)((args % 16) + 48);
 		else
-			str[digit--] = (args % 16) + 87;
+			str[digit--] = (char)((args % 16) + 87);
 		args = args / 16;
 	}
 	return (str);

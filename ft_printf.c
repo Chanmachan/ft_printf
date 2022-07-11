@@ -1,35 +1,57 @@
 #include "ft_printf.h"
 
-#include <stdio.h>
-
-int		ft_printf(const char *format, ...)
+int		read_args(char *str, va_list *args)
 {
-	char	*str;
 	int 	rtn;
-	va_list args;
+	int 	count;
 	size_t 	i;
 
 	i = 0;
-	printf("aaa\n");
-	va_start(args, format);
-	str = (char *) format;
-	if (format == NULL || format[0] == '\0')
+	if (str == NULL || str[0] == '\0')
 		return (0);
 	rtn = 0;
+	count = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] == '%')
 		{
-			rtn += check_conv(&str[i], &args);
+			rtn += check_conv(&str[i], args, count);
+			if (rtn == -1)
+				return (-1);
 			i++;
 		}
 		else
-			rtn += ft_putchar_fd(str[i], 1);
+			rtn += ft_putchar(str[i]);
 		i++;
 	}
+	return (rtn);
+}
+
+int		ft_printf(const char *format, ...)
+{
+	int 	rtn;
+	va_list args;
+
+	va_start(args, format);
+	rtn = read_args((char *)format, &args);
 	va_end(args);
 	return (rtn);
 }
+
+/*
+int main()
+{
+	int res;
+	char a[] = "";
+
+	res = ft_printf("ft_printf :\t%s", a);
+	printf("\n");
+	printf("res :\t%d\n", res);
+	res = printf("printf :\t%s", a);
+	printf("\n");
+	printf("res :\t%d\n", res);
+}
+*/
 
 /*#include <stdio.h>
 #include <libc.h>
@@ -40,35 +62,35 @@ int main()
 	char *s = (char *)calloc(1, (size_t)INT_MAX);
 	memset(s, 'a', (size_t)INT_MAX);
 	i = ft_printf("%s\n", s);
-	printf("%d\n", i);
+	printf("ft_printf : [%d]\n", i);
 	return (0);
 }*/
 
-#include <stdio.h>
+/*#include <stdio.h>
 #include <limits.h>
 #include <string.h>
 
 int main(void)
 {
 	int	res;
-//	char str[] = "1234";
-//	unsigned int xX= 1234;
+	char str[] = "1234";
+	unsigned int xX= 1234;
 	char *a = malloc(sizeof(int) * (INT_MAX));
 	memset(a, 'a', INT_MAX);
 
-//	res = ft_printf("%s\n", a);
-//	printf("res = [%d]\n", res);
+	res = ft_printf("%s\n", a);
+	printf("res = [%d]\n", res);
 	res = printf("%s\n", a);
 	printf("res = [%d]\n", res);
-	/*res = ft_printf("ft_printf :\t%X\n", xX);
+	res = ft_printf("ft_printf :\t%X\n", xX);
 	printf("res = [%d]\n", res);
 	res = printf("printf :\t%X\n", xX);
 	printf("res = [%d]\n", res);
 	res = ft_printf("ft_printf :\t%p\n", str);
 	printf("res = [%d]\n", res);
 	res = printf("printf :\t%p\n", str);
-	printf("res = [%d]\n", res);*/
-}
+	printf("res = [%d]\n", res);
+}*/
 
 /*#include <limits.h>
 
