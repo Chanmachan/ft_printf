@@ -89,7 +89,7 @@ int	check_conv(char *str, va_list *args)
 	else if (str[i] == 'c')
 		rtn += if_c(args);
 	else if (str[i] == 'x' || str[i] == 'X')
-		rtn += if_x(args , str[i]);
+		rtn += if_x(args, str[i]);
 	else if (str[i] == '%')
 		rtn += ft_putchar_fd('%', 1);
 	else if (str[i] == 'u')
