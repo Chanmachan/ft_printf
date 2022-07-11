@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int	check_conv(char *str, va_list *args, int count)
+static int	check_conv(char *str, va_list *args, int count)
 {
 	int		rtn;
 	size_t	i;
@@ -22,7 +22,7 @@ int	check_conv(char *str, va_list *args, int count)
 	return (rtn);
 }
 
-int	read_args(char *str, va_list *args)
+static int	read_args(char *str, va_list *args)
 {
 	int		rtn;
 	int		count;
