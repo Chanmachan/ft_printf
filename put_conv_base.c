@@ -44,7 +44,7 @@ static char	*put_conv(char *str, unsigned long long args, size_t digit)
 	return (str);
 }
 
-unsigned int	ft_put_conv_base(unsigned long long args, char x_X)
+unsigned int	ft_put_conv_base(unsigned long long args, char x_X, int count)
 {
 	unsigned int	rtn;
 	char			*str;
@@ -68,7 +68,7 @@ unsigned int	ft_put_conv_base(unsigned long long args, char x_X)
 			i++;
 		}
 	}
-	ft_putstr_fd(str, 1);
+	ft_putstr(str, count);
 	free(str);
 	return (rtn);
 }

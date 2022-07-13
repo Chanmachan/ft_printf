@@ -12,8 +12,10 @@
 
 #include "ft_printf.h"
 
-int	ft_putchar(char c)
+int	ft_putchar(char c, int count)
 {
+	if (INT_MAX - count < 1)
+		return (-1);
 	write(1, &c, 1);
 	return (1);
 }
@@ -28,10 +30,9 @@ int	ft_putstr(char *s, int count)
 		return (0);
 	}
 	len = ft_strlen(s);
-	if (INT_MAX - len < len)
+	if (INT_MAX - (size_t)count <= len || len > (size_t)(INT_MAX))
 	{
-		count = -1;
-		return (count);
+		return (-1);
 	}
 	i = 0;
 	while (s[i] != '\0')
@@ -42,28 +43,22 @@ int	ft_putstr(char *s, int count)
 	return ((int)i);
 }
 
-int	ft_putnbr(long args)
+int	ft_putnbr(long args, int count)
 {
 	int	rtn;
 
 	rtn = 0;
-	if (args == -2147483648)
-	{
-		rtn += ft_putchar('-');
-		rtn += ft_putchar('2');
-		args = 147483648;
-	}
 	if (args < 0)
 	{
-		rtn += ft_putchar('-');
+		rtn += ft_putstr("-", count);
 		args *= -1;
 	}
 	if (args >= 10)
 	{
-		rtn += ft_putnbr(args / 10);
-		rtn += ft_putnbr(args % 10);
+		rtn += ft_putnbr(args / 10, count);
+		rtn += ft_putnbr(args % 10, count);
 	}
 	else
-		rtn += ft_putchar(args + 48);
+		rtn += ft_putchar((char)(args + 48), count);
 	return (rtn);
 }
