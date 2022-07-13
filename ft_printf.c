@@ -14,48 +14,44 @@
 
 static int	check_conv(char *str, va_list *args, int count)
 {
-	int		rtn;
 	size_t	i;
 
-	rtn = 0;
 	i = 1;
 	if (str[i] == 'd' || str[i] == 'i')
-		rtn += if_d_or_i(args);
+		count = if_d_or_i(args, count);
 	else if (str[i] == 's')
-		rtn += if_s(args, count);
+		count = if_s(args, count);
 	else if (str[i] == 'c')
-		rtn += if_c(args);
+		count = if_c(args, count);
 	else if (str[i] == '%')
-		rtn += ft_putchar('%');
+		count = ft_putchar('%', count);
 	else if (str[i] == 'u')
-		rtn += if_u(args);
+		count = if_u(args, count);
 	else if (str[i] == 'p' || str[i] == 'x' || str[i] == 'X')
-		rtn += if_p_x(args, count, str[i]);
-	return (rtn);
+		count = if_p_x(args, count, str[i]);
+	return (count);
 }
 
 static int	read_args(char *str, va_list *args)
 {
 	int		rtn;
-	int		count;
 	size_t	i;
 
 	i = 0;
-	if (str == NULL || str[0] == '\0')
-		return (0);
 	rtn = 0;
-	count = 0;
+	if (str == NULL)
+		return (ft_putstr("(null)", rtn));
 	while (str[i] != '\0')
 	{
 		if (str[i] == '%')
 		{
-			rtn += check_conv(&str[i], args, count);
-			if (rtn == -1)
-				return (-1);
+			rtn = check_conv(&str[i], args, rtn);
 			i++;
 		}
 		else
-			rtn += ft_putchar(str[i]);
+			rtn = ft_putchar(str[i], rtn);
+		if (rtn <= -1)
+			return (-1);
 		i++;
 	}
 	return (rtn);
@@ -70,6 +66,27 @@ int	ft_printf(const char *format, ...)
 	rtn = read_args((char *)format, &args);
 	va_end(args);
 	return (rtn);
+}
+
+#include <stdio.h>
+#include <limits.h>
+#include <libc.h>
+
+int main()
+{
+	int res;
+	char *a = calloc(1, INT_MAX);
+	memset(a, 'a', INT_MAX - 1);
+	memset(a + INT_MAX - 1, 0, 1);
+//	char *s = (char *)calloc(1, (size_t)INT_MAX + 10);
+//	memset(s, 'a', (size_t)INT_MAX + 5);
+
+	res = ft_printf(NULL);
+	printf("\nres = [%d]\n", res);
+	res = ft_printf("aaa%sd\n", a);
+	printf("res = [%d]\n", res);
+	res = printf("aaa%s\n", a);
+	printf("res = [%d]\n", res);
 }
 
 /*#include <string.h>
