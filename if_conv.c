@@ -12,14 +12,14 @@
 
 #include "ft_printf.h"
 
-int	if_d_or_i(va_list *args)
+int	if_d_or_i(va_list *args, int count)
 {
 	int	rtn;
 	int	conv;
 
 	rtn = 0;
 	conv = va_arg(*args, int);
-	rtn += ft_putnbr(conv);
+	rtn += ft_putnbr(conv, count);
 	return (rtn);
 }
 
@@ -40,25 +40,25 @@ int	if_s(va_list *args, int count)
 	return (rtn);
 }
 
-int	if_c(va_list *args)
+int	if_c(va_list *args, int count)
 {
 	int	rtn;
 	int	conv;
 
 	rtn = 0;
 	conv = va_arg(*args, int);
-	rtn += ft_putchar((char)conv);
+	rtn += ft_putchar((char)conv, count);
 	return (rtn);
 }
 
-int	if_u(va_list *args)
+int	if_u(va_list *args, int count)
 {
 	int				rtn;
 	unsigned int	u;
 
 	rtn = 0;
 	u = va_arg(*args, unsigned int);
-	rtn += ft_putnbr(u);
+	rtn += ft_putnbr(u, count);
 	return (rtn);
 }
 
@@ -73,12 +73,12 @@ int	if_p_x(va_list *args, int count, char c)
 	{
 		p = va_arg(*args, void *);
 		rtn += ft_putstr("0x", count);
-		rtn += (int) ft_put_conv_base((unsigned long long) p, c);
+		rtn += (int) ft_put_conv_base((unsigned long long) p, c, count);
 	}
 	else
 	{
 		conv = va_arg(*args, unsigned int);
-		rtn += (int) ft_put_conv_base(conv, c);
+		rtn += (int) ft_put_conv_base(conv, c, count);
 	}
 	return (rtn);
 }
