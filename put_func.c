@@ -17,7 +17,7 @@ int	ft_putchar(char c, int count)
 	if (INT_MAX - count < 1)
 		return (-1);
 	write(1, &c, 1);
-	return (1);
+	return (count + 1);
 }
 
 int	ft_putstr(char *s, int count)
@@ -25,10 +25,6 @@ int	ft_putstr(char *s, int count)
 	size_t	i;
 	size_t	len;
 
-	if (s[0] == '\0')
-	{
-		return (0);
-	}
 	len = ft_strlen(s);
 	if (INT_MAX - (size_t)count <= len || len > (size_t)(INT_MAX))
 	{
@@ -40,25 +36,22 @@ int	ft_putstr(char *s, int count)
 		write(1, &s[i], 1);
 		i++;
 	}
-	return ((int)i);
+	return ((int)i + count);
 }
 
 int	ft_putnbr(long args, int count)
 {
-	int	rtn;
-
-	rtn = 0;
 	if (args < 0)
 	{
-		rtn += ft_putstr("-", count);
+		count = ft_putstr("-", count);
 		args *= -1;
 	}
 	if (args >= 10)
 	{
-		rtn += ft_putnbr(args / 10, count);
-		rtn += ft_putnbr(args % 10, count);
+		ft_putnbr(args / 10, count);
+		ft_putnbr(args % 10, count);
 	}
 	else
-		rtn += ft_putchar((char)(args + 48), count);
-	return (rtn);
+		count = ft_putchar((char)(args + 48), count);
+	return (count);
 }
