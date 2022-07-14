@@ -68,15 +68,14 @@ int	ft_printf(const char *format, ...)
 	return (rtn);
 }
 
-/*
-#include <libc.h>
+/*#include <libc.h>
 
 int main()
 {
 	int res;
-	res = ft_printf(" %s\n", "");
+	res = ft_printf(" %d\n", 10);
 	printf("res : [%d]\n", res);
-	res = printf(" %s\n", "");
+	res = printf(" %d\n", 10);
 	printf("res : [%d]\n", res);
 }*/
 
