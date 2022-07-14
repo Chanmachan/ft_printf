@@ -70,5 +70,5 @@ unsigned int	ft_put_conv_base(unsigned long long args, char x_X, int count)
 	}
 	ft_putstr(str, count);
 	free(str);
-	return (rtn);
+	return (rtn + count);
 }

@@ -73,9 +73,9 @@ int	ft_printf(const char *format, ...)
 int main()
 {
 	int res;
-	res = ft_printf(" %d\n", 10);
+	res = ft_printf(" %x\n", 0);
 	printf("res : [%d]\n", res);
-	res = printf(" %d\n", 10);
+	res = printf(" %x\n", 0);
 	printf("res : [%d]\n", res);
 }*/
 

@@ -59,21 +59,19 @@ int	if_u(va_list *args, int count)
 
 int	if_p_x(va_list *args, int count, char c)
 {
-	int				rtn;
 	void			*p;
 	unsigned int	conv;
 
-	rtn = 0;
 	if (c == 'p')
 	{
 		p = va_arg(*args, void *);
-		rtn += ft_putstr("0x", count);
-		rtn += (int) ft_put_conv_base((unsigned long long) p, c, count);
+		count = ft_putstr("0x", count);
+		count = (int) ft_put_conv_base((unsigned long long) p, c, count);
 	}
 	else
 	{
 		conv = va_arg(*args, unsigned int);
-		rtn += (int) ft_put_conv_base(conv, c, count);
+		count = (int) ft_put_conv_base(conv, c, count);
 	}
-	return (rtn);
+	return (count);
 }
