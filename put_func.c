@@ -48,8 +48,8 @@ int	ft_putnbr(long args, int count)
 	}
 	if (args >= 10)
 	{
-		ft_putnbr(args / 10, count);
-		ft_putnbr(args % 10, count);
+		count = ft_putnbr(args / 10, count);
+		count = ft_putnbr(args % 10, count);
 	}
 	else
 		count = ft_putchar((char)(args + 48), count);
