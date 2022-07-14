@@ -14,30 +14,25 @@
 
 int	if_d_or_i(va_list *args, int count)
 {
-	int	rtn;
 	int	conv;
 
-	rtn = 0;
 	conv = va_arg(*args, int);
-	rtn += ft_putnbr(conv, count);
-	return (rtn);
+	count = ft_putnbr(conv, count);
+	return (count);
 }
 
 int	if_s(va_list *args, int count)
 {
-	int		rtn;
 	char	*s;
 
-	rtn = 0;
 	s = va_arg(*args, char *);
 	if (!s)
 	{
-		rtn += 6;
-		ft_putstr("(null)", count);
-		return (rtn);
+		count = ft_putstr("(null)", count);
+		return (count);
 	}
-	rtn = ft_putstr(s, count);
-	return (rtn);
+	count = ft_putstr(s, count);
+	return (count);
 }
 
 int	if_c(va_list *args, int count)
