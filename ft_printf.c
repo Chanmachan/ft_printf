@@ -68,7 +68,19 @@ int	ft_printf(const char *format, ...)
 	return (rtn);
 }
 
-#include <stdio.h>
+/*
+#include <libc.h>
+
+int main()
+{
+	int res;
+	res = ft_printf(" %s\n", "");
+	printf("res : [%d]\n", res);
+	res = printf(" %s\n", "");
+	printf("res : [%d]\n", res);
+}*/
+
+/*#include <stdio.h>
 #include <limits.h>
 #include <libc.h>
 
@@ -87,7 +99,7 @@ int main()
 	printf("res = [%d]\n", res);
 	res = printf("aaa%s\n", a);
 	printf("res = [%d]\n", res);
-}
+}*/
 
 /*#include <string.h>
 
