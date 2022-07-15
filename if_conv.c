@@ -37,24 +37,20 @@ int	if_s(va_list *args, int count)
 
 int	if_c(va_list *args, int count)
 {
-	int	rtn;
 	int	conv;
 
-	rtn = 0;
 	conv = va_arg(*args, int);
-	rtn += ft_putchar((char)conv, count);
-	return (rtn);
+	count = ft_putchar((char)conv, count);
+	return (count);
 }
 
 int	if_u(va_list *args, int count)
 {
-	int				rtn;
 	unsigned int	u;
 
-	rtn = 0;
 	u = va_arg(*args, unsigned int);
-	rtn += ft_putnbr(u, count);
-	return (rtn);
+	count = ft_putnbr(u, count);
+	return (count);
 }
 
 int	if_p_x(va_list *args, int count, char c)
