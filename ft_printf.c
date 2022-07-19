@@ -39,8 +39,6 @@ static int	read_args(char *str, va_list *args)
 
 	i = 0;
 	rtn = 0;
-	if (str == NULL)
-		return (ft_putstr("(null)", rtn));
 	while (str[i] != '\0')
 	{
 		if (str[i] == '%')
@@ -123,21 +121,6 @@ int main()
 }*/
 
 /*#include <stdio.h>
-#include <libc.h>
-
-int main()
-{
-	int i = 0;
-	char *s = (char *)calloc(1, (size_t)INT_MAX);
-	memset(s, 'a', (size_t)INT_MAX);
-	i = ft_printf("%s\n", s);
-	printf("ft_printf\t: [%d]\n", i);
-	i = printf("aa%s\n", s);
-	printf("printf\t\t: [%d]\n", i);
-	return (0);
-}*/
-
-/*#include <stdio.h>
 #include <limits.h>
 #include <string.h>
 
@@ -171,32 +154,6 @@ int main(void)
 	ft_printf(" %p\n %p ", ULONG_MAX, -ULONG_MAX);
 //	printf("\nprintf\n");
 //	printf(" %p %p ", ULONG_MAX, -ULONG_MAX);
-}*/
-
-/*#include <stdio.h>
-
-int main(void)
-{
-	unsigned int i = 0;
-//	long addi = (long)&i;
-	char a[] = "";
-	int res;
-
-	res = 0;
-	ft_printf("%c\n", 'c');
-	ft_printf("%s\n", "abc");
-	res = ft_printf("a = %p\n", a);
-	printf("res = %d\n", res);
-	printf("%c\n", 'c');
-	printf("%s\n", "abc");
-	res = printf("a = %p\n", a);
-	printf("res = %d\n", res);
-	printf("&i = %p\n", &i);
-	printf("res = %d\n", res);
-//	printf("&i = %ld\n", addi);
-
-
-	return (0);
 }*/
 
 /*#ifdef TEST

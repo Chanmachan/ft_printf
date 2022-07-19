@@ -25,10 +25,11 @@ long long	ft_putstr(char *s, long long count)
 	size_t	i;
 	size_t	len;
 
+	if (s == NULL)
+		s = "(null)";
 	len = (long long)ft_strlen(s);
 	if (INT_MAX - (size_t)count <= len + count || len > (size_t)(INT_MAX))
 	{
-		printf("here\n");
 		return (-1);
 	}
 	i = 0;
