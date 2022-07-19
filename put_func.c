@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	ft_putchar(char c, int count)
+long long	ft_putchar(char c, long long count)
 {
 	if (INT_MAX - count < 1)
 		return (-1);
@@ -20,26 +20,27 @@ int	ft_putchar(char c, int count)
 	return (count + 1);
 }
 
-int	ft_putstr(char *s, int count)
+long long	ft_putstr(char *s, long long count)
 {
 	size_t	i;
 	size_t	len;
 
-	len = ft_strlen(s);
-	if (INT_MAX - (size_t)count <= len || len > (size_t)(INT_MAX))
+	len = (long long)ft_strlen(s);
+	if (INT_MAX - (size_t)count <= len + count || len > (size_t)(INT_MAX))
 	{
+		printf("here\n");
 		return (-1);
 	}
 	i = 0;
 	while (s[i] != '\0')
 	{
-		write(1, &s[i], 1);
+		count += write(1, &s[i], 1);
 		i++;
 	}
-	return ((int)i + count);
+	return (count);
 }
 
-int	ft_putnbr(long args, int count)
+long long	ft_putnbr(long args, long long count)
 {
 	if (args < 0)
 	{

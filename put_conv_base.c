@@ -44,15 +44,13 @@ static char	*put_conv(char *str, unsigned long long args, size_t digit)
 	return (str);
 }
 
-unsigned int	ft_put_conv_base(unsigned long long args, char x_X, int count)
+long long	ft_put_conv_base(unsigned long long args, char x_X, long long count)
 {
 	unsigned int	rtn;
 	char			*str;
 	size_t			digit;
 	size_t			i;
 
-	if (args < 0)
-		args = args + 4294967295 + 1;
 	rtn = get_digit_hexa(args);
 	digit = rtn;
 	str = (char *) malloc (sizeof(char) * (digit + 1));

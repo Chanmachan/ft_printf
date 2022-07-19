@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	if_d_or_i(va_list *args, int count)
+long long	if_d_or_i(va_list *args, long long count)
 {
 	int	conv;
 
@@ -21,7 +21,7 @@ int	if_d_or_i(va_list *args, int count)
 	return (count);
 }
 
-int	if_s(va_list *args, int count)
+long long	if_s(va_list *args, long long count)
 {
 	char	*s;
 
@@ -35,7 +35,7 @@ int	if_s(va_list *args, int count)
 	return (count);
 }
 
-int	if_c(va_list *args, int count)
+long long	if_c(va_list *args, long long count)
 {
 	int	conv;
 
@@ -44,7 +44,7 @@ int	if_c(va_list *args, int count)
 	return (count);
 }
 
-int	if_u(va_list *args, int count)
+long long	if_u(va_list *args, long long count)
 {
 	unsigned int	u;
 
@@ -53,7 +53,7 @@ int	if_u(va_list *args, int count)
 	return (count);
 }
 
-int	if_p_x(va_list *args, int count, char c)
+long long	if_p_x(va_list *args, long long count, char c)
 {
 	void			*p;
 	unsigned int	conv;

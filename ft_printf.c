@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static int	check_conv(char *str, va_list *args, int count)
+static long long	check_conv(char *str, va_list *args, long long count)
 {
 	size_t	i;
 
@@ -34,8 +34,8 @@ static int	check_conv(char *str, va_list *args, int count)
 
 static int	read_args(char *str, va_list *args)
 {
-	int		rtn;
-	size_t	i;
+	long long	rtn;
+	size_t		i;
 
 	i = 0;
 	rtn = 0;
@@ -50,11 +50,11 @@ static int	read_args(char *str, va_list *args)
 		}
 		else
 			rtn = ft_putchar(str[i], rtn);
-		if (rtn <= -1)
+		if (rtn == -1 || rtn > INT_MAX)
 			return (-1);
 		i++;
 	}
-	return (rtn);
+	return ((int)rtn);
 }
 
 int	ft_printf(const char *format, ...)
@@ -73,9 +73,11 @@ int	ft_printf(const char *format, ...)
 int main()
 {
 	int res;
-	res = ft_printf(" %x\n", 0);
+	long long d;
+	d = 74803470839240738;
+	res = ft_printf(" %u\n", d);
 	printf("res : [%d]\n", res);
-	res = printf(" %x\n", 0);
+	res = printf(" %llu\n", d);
 	printf("res : [%d]\n", res);
 }*/
 
@@ -129,7 +131,9 @@ int main()
 	char *s = (char *)calloc(1, (size_t)INT_MAX);
 	memset(s, 'a', (size_t)INT_MAX);
 	i = ft_printf("%s\n", s);
-	printf("ft_printf : [%d]\n", i);
+	printf("ft_printf\t: [%d]\n", i);
+	i = printf("aa%s\n", s);
+	printf("printf\t\t: [%d]\n", i);
 	return (0);
 }*/
 
