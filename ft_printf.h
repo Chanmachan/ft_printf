@@ -17,9 +17,7 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <limits.h>
-# include "../libft/libft.h"
-
-# include <stdio.h>
+# include "libft/libft.h"
 
 int				ft_printf(const char *format, ...);
 long long		ft_putchar(char c, long long count);
