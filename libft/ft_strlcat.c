@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hommayunosuke <hommayunosuke@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/08 01:14:08 by hommayunosu       #+#    #+#             */
+/*   Updated: 2022/07/08 01:14:09 by hommayunosu      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
@@ -6,10 +18,12 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	size_t	len_src;
 	size_t	i;
 
+	if (size == 0)
+		return (ft_strlen(src));
 	len_dst = ft_strlen(dst);
 	len_src = ft_strlen(src);
 	i = 0;
-	if (size < len_dst)
+	if (size <= len_dst)
 		return (size + len_src);
 	if (size > len_dst)
 	{
@@ -27,23 +41,21 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	return (len_dst + len_src);
 }
 
-/*
-#include <stdio.h>
+/*#include <stdio.h>
 #include <string.h>
 
 int main(void)
 {
-	char a[20] = "abc";
-	char b[] = "jklmnopqr";
+	char *a = "B";
+	char b[] = "";
 
 	// printf("%zu\n", ft_strlcat(a, b, sizeof(a)/sizeof(char)));
-	printf("%zu\n", ft_strlcat(a, b, 8));
+	printf("%zu\n", ft_strlcat(a, b, 0));
 	printf("%s\n", a);
 
-	char c[20] = "abc";
-	char d[] = "jklmnopqr";
+	char *c = "B";
+	char d[] = "";
 
-	printf("%lu\n", strlcat(c, d, 8));
+	printf("%lu\n", strlcat(c, d, 0));
 	printf("%s\n", c);
-}
-*/
+}*/

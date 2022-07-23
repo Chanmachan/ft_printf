@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hommayunosuke <hommayunosuke@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/08 01:14:01 by hommayunosu       #+#    #+#             */
+/*   Updated: 2022/07/08 01:14:02 by hommayunosu      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-char	*ft_strdup(char *str)
+char	*ft_strdup(const char *str)
 {
 	size_t	i;
 	size_t	len;
@@ -19,3 +31,16 @@ char	*ft_strdup(char *str)
 	rtn_str[i] = '\0';
 	return (rtn_str);
 }
+
+//delete NULL check
+
+/*#include <stdio.h>
+#include <string.h>
+
+int main(void)
+{
+	char *a = NULL;
+
+	printf("%s\n", ft_strdup(a));
+	printf("%s\n", strdup(a));
+}*/

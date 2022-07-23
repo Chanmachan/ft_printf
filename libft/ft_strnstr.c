@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hommayunosuke <hommayunosuke@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/08 01:14:21 by hommayunosu       #+#    #+#             */
+/*   Updated: 2022/07/08 01:14:22 by hommayunosu      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strnstr(const char *s1, const char *s2, size_t len)
@@ -14,30 +26,26 @@ char	*ft_strnstr(const char *s1, const char *s2, size_t len)
 	while (s1[i] != '\0')
 	{
 		j = 0;
-		while ((s1[i + j] == s2[j] || s2[j] == '\0') && (i + j) < len)
+		while ((s1[i + j] == s2[j] || s2[j] == '\0') && (i + j) <= len)
 		{
 			if (s2[j] == '\0')
 				return (((char *) s1) + i);
 			j++;
 		}
-		if (s2[j] == '\0')
-			return ((char *)s1 + i);
 		i++;
 	}
 	return (NULL);
 }
 
-/*
-#include <string.h>
+/*#include <string.h>
 #include <stdio.h>
 
 int main(void)
 {
-	char a[] = "aaabcabcd";
-	char b[] = "abcd";
+	char *a = NULL;
+	char b[] = "\0";
 	size_t	len = 9;
 
 	printf("%s\n", ft_strnstr(a, b, len));
 	printf("%s\n", strnstr(a, b, len));
-}
-*/
+}*/

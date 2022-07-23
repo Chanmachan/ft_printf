@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hommayunosuke <hommayunosuke@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/08 01:13:54 by hommayunosu       #+#    #+#             */
+/*   Updated: 2022/07/08 01:13:55 by hommayunosu      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-size_t	count_array(char *str, char word)
+static size_t	count_array(char const *str, char c)
 {
 	size_t	i;
 	size_t	num_array;
@@ -9,11 +21,11 @@ size_t	count_array(char *str, char word)
 	num_array = 0;
 	while (str[i] != '\0')
 	{
-		while (str[i] == word && str[i] != '\0')
+		while (str[i] == c && str[i] != '\0')
 			i++;
-		if (str[i] != word && str[i] != '\0')
+		if (str[i] != c && str[i] != '\0')
 		{
-			while (str[i] != word && str[i] != '\0')
+			while (str[i] != c && str[i] != '\0')
 				i++;
 			num_array++;
 		}
@@ -21,48 +33,55 @@ size_t	count_array(char *str, char word)
 	return (num_array);
 }
 
-char	*ft_mystrdup(char *str, size_t len)
+char	*advance_str(char *s, char c)
 {
 	size_t	i;
-	char	*rtn_str;
 
-	rtn_str = (char *) malloc (sizeof(char) * (len + 1));
-	if (rtn_str == NULL)
-		return (NULL);
 	i = 0;
-	while (i < len && str[i] != '\0')
+	while (s[i] != '\0' && s[i] == c)
+		i++;
+	s = s + i;
+	return (s);
+}
+
+static char	**allfree(char **rtn_str)
+{
+	size_t	i;
+
+	i = 0;
+	while (rtn_str[i] != NULL)
 	{
-		rtn_str[i] = str[i];
+		free(rtn_str[i]);
 		i++;
 	}
-	rtn_str[i] = '\0';
-	return (rtn_str);
+	free(rtn_str);
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	*new_s;
 	char	**rtn_str;
 	size_t	i;
-	size_t 	j;
+	size_t	j;
 	size_t	array;
 
-	new_s = (char *) s;
-	array = count_array(new_s, c);
-	if (!(rtn_str = (char **) malloc (sizeof(char *) * (array + 1))))
+	if (s == NULL)
+		return (NULL);
+	array = count_array(s, c);
+	rtn_str = (char **) malloc (sizeof(char *) * (array + 1));
+	if (rtn_str == NULL)
 		return (NULL);
 	j = 0;
 	while (j < array)
 	{
 		i = 0;
-		while (new_s[i] != '\0' && new_s[i] == c)
+		s = advance_str((char *)s, c);
+		while (((char *)s)[i] != '\0' && ((char *)s)[i] != c)
 			i++;
-		new_s = new_s + i;
-		i = 0;
-		while (new_s[i] != '\0' && new_s[i] != c)
-			i++;
-		rtn_str[j++] = ft_mystrdup(new_s, i);
-		new_s = new_s + i;
+		rtn_str[j] = ft_substr(s, 0, i);
+		if (rtn_str[j++] == NULL)
+			return (allfree(rtn_str));
+		s = s + i;
 	}
 	rtn_str[j] = NULL;
 	return (rtn_str);
@@ -74,24 +93,22 @@ char	**ft_split(char const *s, char c)
 
 int main(void)
 {
-	char	a[] = "tripouille";
-	char	b = 0;
+	char	a[] = "hello,world,42,tokyo";
+	char	b = ',';
 
 	char	**c = ft_split(a, b);
 	printf("%s\n", c[0]);
 	printf("%s\n", c[1]);
 	printf("%s\n", c[2]);
 	printf("%s\n", c[3]);
-	printf("%s\n", c[4]);
-	free (*c);
 }*/
 
-#include <stdio.h>
+/*#include <stdio.h>
 
-/*int	main(void)
+int	main(void)
 {
-	char	src[] = "tripouille";
-	char	c = 0;
+	char	src[] = "      ";
+	char	c = ' ';
 	char	**sep_str;
 	char	**tmp_sep_str;
 	char	**tmp2_sep_str;

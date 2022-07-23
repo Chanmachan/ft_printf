@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hommayunosuke <hommayunosuke@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/08 01:13:57 by hommayunosu       #+#    #+#             */
+/*   Updated: 2022/07/08 01:14:00 by hommayunosu      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
 	char	*new_s;
-	int	i;
+	size_t	i;
 
 	new_s = (char *) s;
 	i = 0;
@@ -15,7 +27,7 @@ char	*ft_strchr(const char *s, int c)
 	}
 	if ((char) c == '\0')
 		return (new_s + i);
-	return (0);
+	return (NULL);
 }
 
 /*

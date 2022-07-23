@@ -1,22 +1,37 @@
-//
-// Created by 本間優之介 on 2022/06/07.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hommayunosuke <hommayunosuke@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/08 01:13:44 by hommayunosu       #+#    #+#             */
+/*   Updated: 2022/07/08 01:13:45 by hommayunosu      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	char	*itoa_str;
+	long long	long_n;
 
-	itoa_str = ft_itoa(n);
-	ft_putstr_fd(itoa_str, fd);
-	free (itoa_str);
+	long_n = n;
+	if (long_n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		long_n *= -1;
+	}
+	if (long_n >= 10)
+	{
+		ft_putnbr_fd(long_n / 10, fd);
+		ft_putnbr_fd(long_n % 10, fd);
+	}
+	else
+		ft_putchar_fd(long_n + '0', fd);
 }
 
-//free needed
-
-/*
-int main(void)
+/*int main(void)
 {
 	ft_putnbr_fd(2147483647, 1);
-}
- */
+}*/

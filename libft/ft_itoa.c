@@ -1,7 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hommayunosuke <hommayunosuke@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/08 01:13:23 by hommayunosu       #+#    #+#             */
+/*   Updated: 2022/07/08 01:13:24 by hommayunosu      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-size_t 	get_digit(int num, size_t digit)
+static size_t	get_digit(long long num)
 {
+	size_t	digit;
+
+	digit = 1;
+	if (num < 0)
+	{
+		num *= -1;
+		digit++;
+	}
 	while (num >= 10)
 	{
 		num = num / 10;
@@ -10,82 +30,53 @@ size_t 	get_digit(int num, size_t digit)
 	return (digit);
 }
 
-int 	convert_sign_plus(int num)
+static long	if_int_minus(long long num, char *chr_n, size_t *sign)
 {
-	if (num < 0)
-	{
-		num = num * -1;
-	}
+	chr_n[0] = '-';
+	num = num * -1;
+	*sign = 1;
 	return (num);
 }
 
-int	if_int_minimum(int num, char *chr_n, size_t *chanma)
+static char	*put_char_num(long long num, char *chr_n, size_t len, size_t sign)
 {
-	if (num == -2147483648)
+	while (len > 0)
 	{
-		chr_n[0] = '-';
-		chr_n[1] = '2';
-		num = 147483648;
-		*chanma = 2;
-	}
-	return (num);
-}
-
-int if_negative(int num, char *chr_n, size_t *chanma)
-{
-	if (num < 0)
-	{
-		chr_n[0] = '-';
-		num = num * -1;
-		*chanma = 1;
-	}
-	return (num);
-}
-
-char	*put_char_num(int num, char *chr_n, size_t *chanma, size_t len)
-{
-	while (len-- > *chanma)
-	{
-		chr_n[len] = num % 10 + 48;
+		chr_n[len] = num % 10 + '0';
 		num = num / 10;
+		len--;
 	}
+	if (sign == 0)
+		chr_n[0] = num % 10 + '0';
 	return (chr_n);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*chr_n;
-	size_t 	len_n;
-	int 	tmp_n;
-	size_t 	chanma;
+	char		*chr_n;
+	size_t		len_n;
+	size_t		sign;
+	long long	long_n;
 
-	tmp_n = n;
-	len_n = 2;
-	chanma = 0;
-	if (tmp_n == -2147483648)
-		len_n = 11;
-	if (tmp_n < 0)
-		len_n = len_n + 1;
-	if (tmp_n < 0)
-		tmp_n = convert_sign_plus(tmp_n);
-	len_n = get_digit(tmp_n, len_n);
-	if (!(chr_n = (char *)malloc(sizeof(char) * (len_n + 1))))
+	long_n = n;
+	sign = 0;
+	len_n = get_digit(long_n);
+	chr_n = (char *)malloc(sizeof(char) * (len_n + 1));
+	if (chr_n == NULL)
 		return (NULL);
-	n = if_int_minimum(n, chr_n, &chanma);
-	n = if_negative(n, chr_n, &chanma);
-	chr_n[len_n--] = '\0';
-	chr_n = put_char_num(n, chr_n, &chanma, len_n);
+	if (n < 0)
+		long_n = if_int_minus(n, chr_n, &sign);
+	chr_n[len_n] = '\0';
+	chr_n = put_char_num(long_n, chr_n, len_n - 1, sign);
 	return (chr_n);
 }
 
-/*
-#include <stdio.h>
+/*#include <stdio.h>
 
 int main(void)
 {
-	printf("%s\n", ft_itoa(-2147483648));
-}
-*/
+	printf("%s\n", ft_itoa(423789));
+}*/
 
 //int -> -2147483648 <= n <= 2147483647
 
