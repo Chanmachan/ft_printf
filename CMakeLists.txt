@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 project(printf)
-add_executable(ft_printf ./ft_printf.c
+add_executable(ft_printf
+        ./ft_printf.c
         ./put_func.c
         ./libft/ft_strnstr.c
         ./libft/ft_isdigit.c
@@ -38,4 +39,5 @@ add_executable(ft_printf ./ft_printf.c
         ./libft/ft_tolower.c
         ./if_conv.c
         ./put_conv_base.c
+        ./ft_printf.h
         )
