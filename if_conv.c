@@ -67,7 +67,7 @@ long long	if_p_x(va_list *args, long long count, char c)
 	else
 	{
 		conv = va_arg(*args, unsigned int);
-		count = (int) ft_put_conv_base(conv, c, count);
+		count = ft_put_conv_base(conv, c, count);
 	}
 	return (count);
 }
