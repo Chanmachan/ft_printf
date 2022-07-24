@@ -72,9 +72,12 @@ int	ft_printf(const char *format, ...)
 int main()
 {
 	int i = 0;
-	char *s = (char *)calloc(1, (size_t)INT_MAX + 10);
-	memset(s, 'a', (size_t)INT_MAX + 5);
-	i = ft_printf("%s\n", s);
+	char *s = (char *)calloc(1, (size_t)INT_MAX - 4);
+	memset(s, 'a', (size_t)INT_MAX - 5);
+	int d = INT_MAX;
+	i = ft_printf("%s%d\n", s, d);
+	printf("%d\n", i);
+	i = printf("%s%d\n", s, d);
 	printf("%d\n", i);
 	free(s);
 	return (0);
