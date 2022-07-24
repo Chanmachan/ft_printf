@@ -17,8 +17,6 @@ static size_t	get_digit_hexa(unsigned long args)
 	int	digit;
 
 	digit = 0;
-	if (args < 0)
-		args *= -1;
 	while (args / 16)
 	{
 		args = args / 16;
