@@ -19,15 +19,15 @@ static long long	check_conv(char *str, va_list *args, long long count)
 	i = 1;
 	if (str[i] == 'd' || str[i] == 'i')
 		count = if_d_or_i(args, count);
-	else if (str[i] == 's')
+	if (str[i] == 's')
 		count = if_s(args, count);
-	else if (str[i] == 'c')
+	if (str[i] == 'c')
 		count = if_c(args, count);
-	else if (str[i] == '%')
+	if (str[i] == '%')
 		count = ft_putchar('%', count);
-	else if (str[i] == 'u')
+	if (str[i] == 'u')
 		count = if_u(args, count);
-	else if (str[i] == 'p' || str[i] == 'x' || str[i] == 'X')
+	if (str[i] == 'p' || str[i] == 'x' || str[i] == 'X')
 		count = if_p_x(args, count, str[i]);
 	return (count);
 }
