@@ -117,26 +117,6 @@ int main()
 	printf("res = [%d]\n", res);
 }*/
 
-/*#include <string.h>
-
-int main()
-{
-	int res;
-	char *a = malloc(SIZE_MAX + 1);
-	memset(a, 'n', SIZE_MAX);
-	a[SIZE_MAX + 1] = '\0';
-//	int d = INT_MAX;
-
-	// ft_printf
-	res = ft_printf("ft_printf :\t%s", a);
-	printf("\n");
-	printf("res :\t\t%d\n", res);
-	// printf
-	res = printf("printf    :\t%s", a);
-	printf("\n");
-	printf("res + 3 :\t%d\n", res);
-}*/
-
 /*#include <stdio.h>
 #include <limits.h>
 #include <string.h>
